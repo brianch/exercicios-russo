@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/exercicios-russo/static/css/main.8278b968.css",
-    "main.js": "/exercicios-russo/static/js/main.b7df9052.js",
+    "main.js": "/exercicios-russo/static/js/main.cb323148.js",
     "static/js/453.e975cedb.chunk.js": "/exercicios-russo/static/js/453.e975cedb.chunk.js",
     "static/media/roboto-latin-700-normal.woff2": "/exercicios-russo/static/media/roboto-latin-700-normal.4535474e1cf8598695ad.woff2",
     "static/media/roboto-latin-500-normal.woff2": "/exercicios-russo/static/media/roboto-latin-500-normal.7077203b1982951ecf76.woff2",
@@ -62,11 +62,11 @@
     "static/media/roboto-greek-ext-400-normal.woff": "/exercicios-russo/static/media/roboto-greek-ext-400-normal.16eb83b4a3b1ea994243.woff",
     "index.html": "/exercicios-russo/index.html",
     "main.8278b968.css.map": "/exercicios-russo/static/css/main.8278b968.css.map",
-    "main.b7df9052.js.map": "/exercicios-russo/static/js/main.b7df9052.js.map",
+    "main.cb323148.js.map": "/exercicios-russo/static/js/main.cb323148.js.map",
     "453.e975cedb.chunk.js.map": "/exercicios-russo/static/js/453.e975cedb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8278b968.css",
-    "static/js/main.b7df9052.js"
+    "static/js/main.cb323148.js"
   ]
 }
