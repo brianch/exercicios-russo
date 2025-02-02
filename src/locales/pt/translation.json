@@ -1,0 +1,14 @@
+{
+  "title": "Exercícios de Russo",
+  "lang": "Idioma",
+  "english": "Inglês",
+  "portuguese": "Português",
+  "numbers": {
+    "gamemode": "Modo de jogo",
+    "show_number": "Mostrar número e escrever em Russo",
+    "show_russian": "Mostrar Russo e digitar número",
+    "what_is_the_number": "Qual é o número {{num}}?",
+    "in_russian": "{{num}} em Russo",
+    "check": "Checar"
+  }
+}

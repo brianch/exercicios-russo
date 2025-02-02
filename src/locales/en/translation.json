@@ -1,0 +1,14 @@
+{
+  "title": "Russian Exercises",
+  "lang": "Language",
+  "english": "English",
+  "portuguese": "Portuguese",
+  "numbers": {
+    "gamemode": "Game mode",
+    "show_number": "Show number and write in Russian",
+    "show_russian": "Show Russian and type number",
+    "what_is_the_number": "What number is {{num}}?",
+    "in_russian": "{{num}} in Russian",
+    "check": "Check"
+  }
+}

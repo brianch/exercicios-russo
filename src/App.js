@@ -5,7 +5,19 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import i18n from "i18next";
+import { useTranslation, initReactI18next } from "react-i18next";
+import common_en from "./locales/en/translation.json";
+import common_pt from "./locales/pt/translation.json";
+
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { Alert, Button, Divider, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Stack } from '@mui/material';
@@ -47,12 +59,33 @@ const darkTheme = createTheme({
   },
 });
 
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    lng: "pt", // if you're using a language detector, do not define the lng option
+    fallbackLng: "en",
+    resources: {
+      en: {
+          common: common_en // 'common' is our custom namespace
+      },
+      pt: {
+          common: common_pt
+      },
+    },
+    interpolation: {
+      escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+    }
+  });
+
 function App() {
+  const { t } = useTranslation("common");
+  const [lang, setLang] = useState(t(i18n.language));
+
   const [numeroAleatorio, setNumeroAleatorio] = useState(Math.floor(Math.random() * 101));
   const [numeroDigitado, setNumeroDigitado] = useState("");
   const [statusNumero, setStatusNumero] = useState("");
   const [modoDeJogo, setModoDeJogo] = useState("russo");
-  const [labelNum, setLabelNum] = useState(numeroAleatorio + " em Russo");
+  const [labelNum, setLabelNum] = useState(t('numbers.in_russian', { num: numeroAleatorio }));
 
   function handleInputChange(event) {
     setNumeroDigitado(event.target.value.toLowerCase());
@@ -97,24 +130,54 @@ function App() {
     if (m == "russo") {
       let novoNum = Math.floor(Math.random() * 101);
       setNumeroAleatorio(novoNum);
-      setLabelNum(novoNum + " em Russo");
+      setLabelNum(t('numbers.in_russian', {num: novoNum }));
       setNumeroDigitado("");
       setStatusNumero("");
     } else {
       let novoNum = numeros["russo"][Math.floor(Math.random() * 101)];
       setNumeroAleatorio(novoNum);
-      setLabelNum("Qual é o número " + novoNum + "?");
+      setLabelNum(t('numbers.what_is_the_number', {num: novoNum }));
       setNumeroDigitado("");
       setStatusNumero("");
     }
   }
+
+  function handleLangChange(event) {
+    setLang(event.target.value);
+    i18n.changeLanguage(event.target.value);
+    if (modoDeJogo == "russo") {
+      setLabelNum(t('numbers.in_russian', {num: numeroAleatorio }));
+    } else {
+      setLabelNum(t('numbers.what_is_the_number', {num: numeroAleatorio }));
+    }
+  }
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {t("title")}
+          </Typography>
+          <InputLabel id="demo-simple-select-label">{t("lang")}: </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={lang}
+              label={t(i18n.language)}
+              placeholder={t("lang")}
+              onChange={handleLangChange}
+                          >
+              <MenuItem value='en'>{t("english")}</MenuItem>
+              <MenuItem value='pt'>{t("portuguese")}</MenuItem>
+            </Select>
+        </Toolbar>
+      </AppBar>
       <Box id="App" component="form" display="flex" alignItems="center" justifyContent="center" height="100vh" onSubmit={checaResposta} sx={{ p: 2, border: '1px grey' }}>
         <Stack spacing={2}>
           <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">Modo de jogo</FormLabel>
+            <FormLabel id="demo-radio-buttons-group-label">{t("numbers.gamemode")}</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="russo"
@@ -122,8 +185,8 @@ function App() {
               value={modoDeJogo}
               onChange={handleRadioChange}
             >
-              <FormControlLabel value="russo" control={<Radio />} label="Mostrar número e escrever em Russo" />
-              <FormControlLabel value="numero" control={<Radio />} label="Mostrar Russo e digitar número" />
+              <FormControlLabel value="russo" control={<Radio />} label={t('numbers.show_number')} />
+              <FormControlLabel value="numero" control={<Radio />} label={t('numbers.show_russian')} />
             </RadioGroup>
           </FormControl>
           <Divider orientation="horizontal" flexItem />
@@ -134,7 +197,7 @@ function App() {
           </Box>
           <Divider orientation="horizontal" flexItem />
           <TextField id="outlined-basic" label={labelNum} variant="outlined" onChange={handleInputChange} autoComplete='off' value={numeroDigitado} />
-          <Button type="submit">Checar</Button>
+          <Button type="submit">{t('numbers.check')}</Button>
         </Stack>
       </Box>
     </ThemeProvider>
