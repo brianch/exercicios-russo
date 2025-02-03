@@ -160,18 +160,17 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {t("title")}
           </Typography>
-          <InputLabel id="demo-simple-select-label">{t("lang")}: </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={lang}
-              label={t(i18n.language)}
-              placeholder={t("lang")}
-              onChange={handleLangChange}
-                          >
-              <MenuItem value='en'>{t("english")}</MenuItem>
-              <MenuItem value='pt'>{t("portuguese")}</MenuItem>
-            </Select>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={lang}
+            label={t(i18n.language)}
+            placeholder={t("lang")}
+            onChange={handleLangChange}
+                        >
+            <MenuItem value='en'>{t("english")}</MenuItem>
+            <MenuItem value='pt'>{t("portuguese")}</MenuItem>
+          </Select>
         </Toolbar>
       </AppBar>
       <Box id="App" component="form" display="flex" alignItems="center" justifyContent="center" height="100vh" onSubmit={checaResposta} sx={{ p: 2, border: '1px grey' }}>
